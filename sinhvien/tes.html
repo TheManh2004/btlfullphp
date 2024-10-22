@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../sp_SinhVien/header.css">
+    <link rel="stylesheet" href="../sp_SinhVien/taiKhoan.css">
+    <link rel="stylesheet" href="../sp_SinhVien/chuong.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+            <div class="navbar">
+                <div class="logo">
+                    <a href="../sinhvien_php/index.php" style = "padding:0;">
+                        <img src="../img/logo.png" alt="Fast Learn Logo">
+                    </a>
+                </div>
+                <div class="search-container">
+                    <input type="text" placeholder="What do you want to learn?">
+                    <div class="separator"></div>
+                    <button class="search-button">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </button>
+                </div>
+                <!-- Phần menu chính -->
+                <div class="header-content">
+                    <ul class="menu">
+                        <li class="menu-item">
+                            <a href="../sinhvien_php/khoahoc_full.php">Khóa học</a>
+                            <ul class="submenu">
+                                <li><a href="../sinhvien_php/khoahoc_fr.php">Khóa học miễn phí</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <a href="../sinhvien_php/khoahoccuatoi.php">Khóa học của tôi</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="user-profile" style="width: 200px; display: flex; align-items: center; justify-content: space-evenly;">
+                    <i class="fa-regular fa-bell" style="font-size: 25px; cursor: pointer;" id="bell-icon"></i>
+                        <div class="notification-container" id="notification-container" style="display: none;">
+                            <h1>Thông báo</h1>
+                            <hr>
+                            <div class="notification">
+                                <div class="icon green">
+                                    <i class="fa-regular fa-envelope"></i>
+                                </div>
+                                <div class="content">
+                                    <p class="message">Bạn đã nhận được thông báo qua email</p>
+                                    <p class="date">Ngày 02/09/2024</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="notification">
+                                <div class="icon red">
+                                    <i class="fa-regular fa-circle-user"></i>
+                                </div>
+                                <div class="content">
+                                    <p class="message">Tài khoản đã được đổi mật khẩu</p>
+                                    <p class="date">Ngày 28/08/2024</p>
+                                </div>
+                            </div>
+                            <a href="#" class="view-all">Tất cả thông báo</a>
+                        </div>
+
+
+                        <!-- /**js cảu form thông báo **/ -->
+                             <script>
+                                    document.getElementById('bell-icon').addEventListener('click', function() {
+                                    var notificationContainer = document.getElementById('notification-container');
+                                    if (notificationContainer.style.display === 'none' || notificationContainer.style.display === '') {
+                                        notificationContainer.style.display = 'block';  // Hiển thị thông báo
+                                    } else {
+                                        notificationContainer.style.display = 'none';   // Ẩn thông báo
+                                    }
+                                });
+                            </script>
+                        <!-- /****/ -->
+
+
+                    <div id="profile-button" class="header-profile">
+                         <!-- Đây là nơi bạn click vào để mở profile -->
+                        <i class="fa-solid fa-user"></i>
+                        <div id="profile-container" class="profile-container" style="display: none;">
+                            <div class="profile-header">
+                                <div class="profile-image"></div>
+                               
+                                <div class="profile-info">
+                                        <h2> <?php echo  htmlspecialchars($user->name) ?></h2>
+                                        <p>  <?php echo  htmlspecialchars($user_email) ?></p>
+                                </div>
+                            </div>
+                            <ul class="profile-menu">
+                                <li><a href="#"><i class="fa-solid fa-cart-shopping"></i> Giỏ hàng</a></li>
+                                <li><a href="#"><i class="fa-solid fa-bookmark"></i> Bài viết đã lưu</a></li>
+                                <li><a href="#"><i class="fa-solid fa-wallet"></i> Lịch sử giao dịch</a></li>
+                                <li><a href="tes.php"><i class="fa-solid fa-gear"></i> Cài đặt</a></li>
+                                <li onclick="logout()"><a href="#"><i class="fa-solid fa-power-off"></i> Đăng xuất</a></li>
+                            </ul>
+                            <script src="../js/logout.js"></script>
+                        </div>
+                    </div>
+                <script src="../js/tk.js"></script>
+            </div>
+    </header>
+   
+</body>
+</html>

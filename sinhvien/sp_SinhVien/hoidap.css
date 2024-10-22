@@ -1,0 +1,91 @@
+.qa-frame {
+    height: 100%;
+    width: 0; /* Ẩn khung ban đầu */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    background-color: #ffffff; /* Màu nền trắng */
+    overflow-x: hidden;
+    transition: 0.5s;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* Bóng mờ cho khung */
+}
+
+.qa-frame.open {
+    width: 400px; /* Kích thước khung khi mở */
+}
+.Dong{
+    float: right;
+    padding: 3%;
+    
+}
+
+.qa-content {
+    padding: 20px;
+    height: calc(100% - 60px); /* Cân chỉnh chiều cao sau header */
+    overflow-y: auto; /* Cuộn nội dung nếu cần */
+}
+
+.qa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #007BFF; /* Màu xanh cho tiêu đề */
+    color: white;
+    border-top-left-radius: 10px; /* Bo góc cho header */
+    border-top-right-radius: 10px; /* Bo góc cho header */
+}
+
+.close-button {
+    background: none; /* Không có nền */
+    border: none; /* Không có viền */
+    color: white; /* Màu chữ trắng */
+    font-size: 20px; /* Kích thước chữ */
+    cursor: pointer; /* Con trỏ khi hover */
+}
+
+.question-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-form textarea {
+    width: 100%;
+    height: 100px; /* Chiều cao của textarea */
+    padding: 10px; /* Padding cho textarea */
+    border-radius: 5px; /* Bo góc */
+    border: 1px solid #ccc; /* Viền xám */
+    font-size: 16px; /* Kích thước chữ */
+    margin-top: 10px; /* Khoảng cách trên */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.question-form textarea:focus {
+    border-color: #007BFF; /* Màu viền khi focus */
+    outline: none; /* Bỏ viền ngoài khi focus */
+}
+
+.btn-submit {
+    margin-top: 10px; /* Khoảng cách trên */
+    padding: 10px;
+    background-color: #007BFF; /* Màu nền cho nút gửi */
+    color: white; /* Màu chữ nút gửi */
+    border: none; /* Không có viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ khi hover */
+    font-size: 16px; /* Kích thước chữ */
+    transition: background-color 0.3s, transform 0.3s; /* Hiệu ứng chuyển màu */
+}
+
+.btn-submit:hover {
+    background-color: #0056b3; /* Tối màu hơn khi hover */
+    transform: translateY(-2px); /* Nhấc lên khi hover */
+}
+
+/* Responsive cho frame Hỏi Đáp */
+@media screen and (max-width: 600px) {
+    .qa-frame.open {
+        width: 100%; /* Chiếm toàn bộ chiều rộng trên màn hình nhỏ */
+    }
+}

@@ -1,0 +1,44 @@
+       /* Kiểu cho Frame Thông Báo Bên Trái */
+       .notification-frame {
+        height: 100%; /* Full height */
+        width: 0; /* 0 để ẩn frame */
+        position: fixed; /* Cố định vị trí */
+        z-index: 1001; /* Đảm bảo nằm trên các phần tử khác */
+        top: 0;
+        left: 0;
+        background-color: #f1f1f1; /* Màu nền frame */
+        overflow-x: hidden; /* Không hiện thanh cuộn ngang */
+        transition: 0.5s; /* Hiệu ứng mượt mà khi mở/đóng */
+        box-shadow: 2px 0 5px rgba(0,0,0,0.5); /* Đổ bóng */
+    }
+    
+    /* Khi frame được mở */
+    .notification-frame.open {
+        width: 400px; /* Chiều rộng khi mở, điều chỉnh theo nhu cầu */
+    }
+    
+    /* Header của frame */
+    .notification-frame .icon-exit {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+    }
+    
+    .notification-frame .icon-exit .exit {
+        font-size: 24px;
+        color: #000;
+        cursor: pointer;
+    }
+    
+    /* Nội dung frame */
+    .notification-frame .register-container {
+        padding: 20px;
+        overflow-y: auto; /* Cuộn dọc nếu nội dung dài */
+    }
+    
+    /* Responsive cho Frame Thông Báo */
+    @media screen and (max-width: 600px) {
+        .notification-frame.open {
+            width: 100%; /* Trên thiết bị di động, mở rộng toàn bộ chiều rộng */
+        }
+    }

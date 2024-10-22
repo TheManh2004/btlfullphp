@@ -1,0 +1,46 @@
+.clicknotification {
+  position: relative;
+}
+
+.question-list {
+  display: none;
+  /* Ẩn mặc định */
+  position: absolute;
+  top: 100%;
+  /* Đảm bảo nó hiện dưới notification */
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.question-list ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.question-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  
+}
+.question-list a {
+  border: outset;
+}
+
+.question-list li:last-child {
+  border-bottom: none;
+}
+
+.question-list .question-title {
+  font-weight: bold;
+}
+
+.question-list .question-time {
+  font-size: 12px;
+  color: gray;
+}

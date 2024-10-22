@@ -1,0 +1,102 @@
+/*header*/
+header{
+    border-bottom: 1px solid #eee;
+ }
+ header ul li {
+    list-style: none;
+ }
+ 
+ .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+ }
+ 
+ header .navbar .menu {
+    list-style: none;
+    display: flex;
+ }
+ 
+ .navbar ul li a {
+   text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    display: block;
+    padding: 10px 15px;
+ }
+ 
+ header .navbar .logo img {
+    height: 100px;
+    
+ }
+ 
+ /* Phần submenu */
+ header .navbar .menu .submenu {
+    display: none; /* Mặc định ẩn */
+    position: absolute; /* Hiển thị phía dưới menu chính */
+    top: 65%;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    list-style: none;
+ }
+ header .navbar a:hover{
+    background-color: #9df3ff;
+    transition: all 1.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+ header .navbar .menu .submenu li {
+    width: auto;
+ }
+ 
+ header .navbar .menu .submenu li a {
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+ }
+ 
+ /* Hiệu ứng hover: hiện submenu khi hover vào menu-item */
+ header .navbar .menu .menu-item:hover .submenu {
+    display: block;
+ }
+ 
+ /* Thêm một số CSS cho search bar */
+ .search-container {
+    position: relative;
+    display: inline-block;
+ }
+ 
+ .search-container input[type="text"] {
+    padding: 10px 40px 10px 15px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 5px 5px 0px #C4D0E1;
+ }
+ 
+ .search-button {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #0095FF;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 0 5px 5px 0;
+    z-index: 1;
+    height: 100%;
+    padding: 0 10px;
+ }
+ 
+ .search-icon {
+    font-size: 20px;
+    color: #FFFFFF;
+ }
+ /****/
+ 
+ body{
+    margin: 0;
+ }
+ 

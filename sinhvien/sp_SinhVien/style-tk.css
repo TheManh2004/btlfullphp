@@ -1,0 +1,94 @@
+/* Đặt kiểu chung cho toàn bộ trang */
+
+.container {
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Kiểu cho phần bên trái (avatar và tên) */
+.left {
+    width: 20%;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    align-items: center;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    gap: 5%;
+    
+}
+
+.left img {
+    width: 50%;
+    height: 30%;
+    border-radius: 20%;
+    object-fit: cover;
+}
+
+/* Kiểu cho phần bên phải */
+.right {
+    width: 40%;
+    padding: 20px;
+}
+
+.tren, .duoi {
+    margin-bottom: 20px;
+}
+
+.text1, .text2 {
+    color: #0095FF;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Kiểu cho các nhóm nhập liệu */
+.from-group {
+    margin-bottom: 15px;
+
+}
+
+.from-group label {
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.from-group input {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button.btn, button.btn2 {
+    background-color: #0095FF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    align-items: flex-end;
+    float: right;
+}
+
+button.btn:hover {
+    background-color: #4fb4fc;
+}
+button.btn2:hover {
+    background-color: #4fb4fc;
+}
+
+.btn-exit .fa-xmark{
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 25px;
+    color: #000;
+}
