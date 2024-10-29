@@ -14,6 +14,26 @@
 <body>
 
 <header>
+<?php
+    // Đặt session_start() ở đầu tệp
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+    include 'connect.php';
+   $timeout_duration = 300; 
+
+   if (isset($_SESSION['last_activity'])) {
+       $time_inactive = time() - $_SESSION['last_activity'];
+       if ($time_inactive > $timeout_duration) {
+           session_unset();
+           session_destroy();
+           header('Location: /giangvien/account/login.php');
+           exit;
+       }
+   }
+   
+   $_SESSION['last_activity'] = time();
+   ?>
     <?php include('laydulieu.php')?>
 
             <div class="navbar">
@@ -45,7 +65,7 @@
                 </div>
                 <div class="user-profile" style="width: 200px; display: flex; align-items: center; justify-content: space-evenly;">
                 <div class="clicknotification">
-                        <div class="notification" id="notification">
+                        <div class="notification" id="notification" style="cursor: pointer;">
                             <i class="fa fa-envelope"></i>
                             <span class="badge">1</span>
                         </div>
@@ -78,7 +98,7 @@
             data.forEach(question => {
                 var li = document.createElement('li');
                 li.innerHTML = `
-                    <a href="hopthu.php" style="text-decoration: none;">
+                    <a style="text-decoration: none;">
                         <div class="question-title">${question.replier_name} trả lời:</div>
                         <div class="question-content">${question.answer_message}</div>
                         
@@ -96,7 +116,7 @@
                         <!-- /****/ -->
 
 
-                    <div id="profile-button" class="header-profile">
+                    <div id="profile-button" class="header-profile" style="cursor: pointer;">
                          <!-- Đây là nơi bạn click vào để mở profile -->
                         <i class="fa-solid fa-user"></i>
                         <div id="profile-container" class="profile-container" style="display: none;">

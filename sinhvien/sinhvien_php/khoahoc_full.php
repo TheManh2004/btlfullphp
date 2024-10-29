@@ -41,7 +41,7 @@ $majors = [
 // Lặp qua các ngành và lấy khóa học
 foreach ($majors as $major => $id) {
     $chapterSql = "SELECT 
-        chapters.id AS subject_id,
+        chapters.id AS chapter_id,
         chapters.subject_title AS chapter_name,
         chapters.fee AS chapter_fee,
         COUNT(course_enrollments.student_id) AS enrolled_students,
@@ -94,7 +94,7 @@ $conn = null;
                         <?php foreach ($coursesByMajor['technology'] as $chapter): ?>
                             <div class="box4">
                                 <div class="img-box">
-                                    <a href="../sinhvien_php/kick_kh.php?subject_id=<?php echo htmlspecialchars($chapter['subject_id']); ?>">
+                                    <a href="../sinhvien_php/kick_kh-1.php?subject_id=<?php echo htmlspecialchars($chapter['chapter_id']); ?>">
                                         <img src="data:image/jpeg;base64,<?php echo base64_encode($chapter['chapter_image']); ?>"
                                             alt="<?php echo htmlspecialchars($chapter['chapter_name']); ?>"
                                             style="width: 100%; height: auto;">
@@ -130,8 +130,8 @@ $conn = null;
                             <div class="box4">
                                 <div class="img-box">
                                     <a
-                                        href="../sinhvien_php/kick_kh.php?id=<?php echo htmlspecialchars($chapter['subject_id']); ?>">
-                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($chapter['chapter_image']); ?>"
+                                        href="../sinhvien_php/kick_kh-1.php?subject_id=<?php echo htmlspecialchars($chapter['chapter_id']); ?>">
+                                        <img src="data:image/png;base64,<?php echo base64_encode($chapter['chapter_image']); ?>"
                                             alt="<?php echo htmlspecialchars($chapter['chapter_name']); ?>"
                                             style="width: 100%; height: auto;">
                                     </a>
@@ -166,7 +166,7 @@ $conn = null;
                             <div class="box4">
                                 <div class="img-box">
                                     <a
-                                        href="../sinhvien_php/kick_kh.php?id=<?php echo htmlspecialchars($chapter['subject_id']); ?>">
+                                        href="../sinhvien_php/kick_kh-1.php?subject_id=<?php echo htmlspecialchars($chapter['chapter_id']); ?>">
                                         <img src="data:image/jpeg;base64,<?php echo base64_encode($chapter['chapter_image']); ?>"
                                             alt="<?php echo htmlspecialchars($chapter['chapter_name']); ?>"
                                             style="width: 100%; height: auto;">
@@ -202,7 +202,7 @@ $conn = null;
                             <div class="box4">
                                 <div class="img-box">
                                     <a
-                                        href="../sinhvien_php/kick_kh.php?id=<?php echo htmlspecialchars($chapter['subject_id']); ?>">
+                                        href="../sinhvien_php/kick_kh-1.php?subject_id=<?php echo htmlspecialchars($chapter['chapter_id']); ?>">
                                         <img src="data:image/jpeg;base64,<?php echo base64_encode($chapter['chapter_image']); ?>"
                                             alt="<?php echo htmlspecialchars($chapter['chapter_name']); ?>"
                                             style="width: 100%; height: auto;">

@@ -1,4 +1,5 @@
 
+
 nav .nav_top {
    margin: 0;
    padding: 0;
@@ -185,6 +186,7 @@ section .section_top .box_left .box1{
  section .section_top .box_right .next-back{
    display: flex;
    justify-content: flex-end;
+   
    gap: 10%;
 }
 section .section_top .box_right .next-back i{
@@ -193,7 +195,8 @@ section .section_top .box_right .next-back i{
 section .section_top .box_right .next-back button{
    width: 100%;
    border: none;
-   background-color: white;
+   cursor: pointer;
+   background-color: #E6E6E6;
 }
  section .section_top .section_box_top .box_mid {
     display: flex;
@@ -517,7 +520,7 @@ nav .nav_top_kick .nav_footer{
 nav .nav_top_kick .nav_footer .button{
    width: 100%;
    display: flex;
-   padding: 2%;
+   padding-bottom: 30px;
    justify-content: space-around;
 }
 nav .nav_top_kick .nav_footer .button .button_left{
@@ -748,7 +751,7 @@ section .button .kick{
    list-style-type: none;
    display: flex;
    border: outset;
-   box-shadow: 10px 10px 5px;
+   box-shadow: 8px 10px 14px;
 }
 
 .tabs li {
@@ -974,7 +977,7 @@ main {
 
 .modal-content {
    background-color: #fff;
-   margin: 10% auto;
+   margin: 5% auto;
    padding: 20px;
    border-radius: 10px;
    width: 743px;

@@ -31,7 +31,7 @@ $chapterSql = "SELECT
 FROM 
     chapters
 LEFT JOIN 
-    course_enrollments ON chapters.id = course_enrollments.chapter_image  
+    course_enrollments ON chapters.id = course_enrollments.subject_id  
 WHERE 
     chapters.major_id = :major_id  
 GROUP BY 

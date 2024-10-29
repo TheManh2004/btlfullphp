@@ -1,7 +1,7 @@
        /* Kiểu cho Frame Thông Báo Bên Trái */
        .notification-frame {
         height: 100%; /* Full height */
-        width: 0; /* 0 để ẩn frame */
+        width: 30%; /* 0 để ẩn frame */
         position: fixed; /* Cố định vị trí */
         z-index: 1001; /* Đảm bảo nằm trên các phần tử khác */
         top: 0;

@@ -1,3 +1,58 @@
+<?php
+include 'connect.php'; // Kết nối đến cơ sở dữ liệu
+// Bật báo cáo lỗi
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+$limit = 6; // Bạn có thể thay đổi giá trị này theo ý muốn
+$freeLimit = 3; // Số lượng khóa học miễn phí
+$sql = "SELECT 
+            chapters.id AS chapter_id,
+            chapters.subject_title AS chapter_name,
+            chapters.fee AS chapter_fee,
+            COUNT(course_enrollments.student_id) AS enrolled_students,
+            chapters.image AS chapter_image,
+            chapters.major_id
+        FROM 
+            chapters
+        LEFT JOIN 
+            course_enrollments ON chapters.id = course_enrollments.subject_id  
+        GROUP BY 
+            chapters.id, chapters.subject_title, chapters.fee, chapters.image, chapters.major_id
+        ORDER BY 
+            enrolled_students DESC
+        LIMIT :limit"; // Giới hạn lấy các khóa học theo giá trị biến $limit
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(':limit', $limit, PDO::PARAM_INT); // Ràng buộc giá trị của $limit vào tham số :limit
+$stmt->execute();
+$courses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Truy vấn để lấy các khóa học miễn phí (có fee = 0)
+$sqlFreeCourses = "SELECT 
+            chapters.id AS chapter_id,
+            chapters.subject_title AS chapter_name,
+            chapters.fee AS chapter_fee,
+            COUNT(course_enrollments.student_id) AS enrolled_students,
+            chapters.image AS chapter_image,
+            chapters.major_id
+        FROM 
+            chapters
+        LEFT JOIN 
+            course_enrollments ON chapters.id = course_enrollments.subject_id  
+        WHERE 
+            chapters.fee = 0
+        GROUP BY 
+            chapters.id, chapters.subject_title, chapters.fee, chapters.image, chapters.major_id
+        ORDER BY 
+            enrolled_students DESC
+        LIMIT :limit";
+
+$stmtFree = $conn->prepare($sqlFreeCourses);
+$stmtFree->bindValue(':limit', $freeLimit, PDO::PARAM_INT); // Ràng buộc giá trị của $freeLimit vào tham số :limit
+$stmtFree->execute();
+$freeCourses = $stmtFree->fetchAll(PDO::FETCH_ASSOC);
+
+// Đóng kết nối
+$conn = null;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,15 +86,15 @@
                 <div class = "slideshow-container">
                     <div class="banner1">
                         <img src="../img/hinh-nen-may-tinh-11.jpg" alt="">
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>
     </nav>
-
-    <section>
-    <div class="section_top" style = " background-color: #fafafa;">
-        <h1>Một số khoá học nổi bật mà <br> bạn có thể quan tâm</h1>
+<section>
+    <div class="section_top" style = " background-color: #E6E6E6;
+                                        padding-bottom: 10px;">
+        <h1 style="padding-top: 15px;">Một số khoá học nổi bật mà <br> bạn có thể quan tâm</h1> 
         <div class="stye_box">
                 <div class="box_left">
                     <div class="box1">
@@ -78,122 +133,68 @@
         </div>
         <div class="section_box_top">
             <div class="box_mid">
-                <div class="box2">
-                    <div class="img-box">
-                            <a href="../sinhvien_php/kick_kh.php">
-                                <img src="../img/2.png" alt="anh1" style="">
+                <?php foreach ($courses as $index => $course): ?>
+                    <div class="box2">
+                        <div class="img-box">
+                            <a href="../sinhvien_php/kick_kh-1.php?subject_id=<?php echo $course['chapter_id']; ?>">
+                                <img src="image.php?id=<?php echo $course['chapter_id']; ?>" alt="Khóa học">
                             </a>
                             <div class="comment-2">
-                                <p>Khoá Học HTML</p>
-                                <p>129.000đ</p>
+                                <p><?php echo htmlspecialchars($course['chapter_name']); ?></p>
+                                <p><?php echo number_format($course['chapter_fee'], 0, ',', '.'); ?>đ</p>
                             </div>
-                    </div>
-                </div>
-                <div class="box2">
-                    <div class="img-box">
-                            <a href="../sinhvien_php/kick_kh.php">
-                                <img src="../img/java-pro.png" alt="anh1" style="">
-                            </a>
-                            <div class="comment-2">
-                                <p>Khoá Học Java-pro </p>
-                                <p>129.000đ</p>
-                            </div>
-                    </div>
-                </div>
-                <div class="box2">
-                    <div class="img-box">
-                        <a href="../sinhvien_php/kick_kh.php"><img src="../img/Sass.png" alt="anh1" style=""></a>
-                        <div class="comment-2">
-                            <p>Khoá Học Sacc</p>
-                            <p>129.000đ</p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="section_box_top">
-            <div class="box_mid">
-                <div class="box2">
-                    <div class="img-box">
-                        <a href="../sinhvien_php/kick_kh.php"><img src="../img/1.png" alt="anh1" style=""></a>
-                        <div class="comment-2">
-                            <p>Khoá Học IT</p>
-                            <p>129.000đ</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box2">
-                    <div class="img-box">
-                        <a href="../sinhvien_php/kick_kh.php"><img src="../img/6.png" alt="anh1" style=""></a>
-                        <div class="comment-2">
-                            <p>Khoá Học Tiếng</p>
-                            <p>129.000đ</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="box2">
-                    <div class="img-box">
-                        <a href="../sinhvien_php/kick_kh.php"><img src="../img/c++.png" alt="anh1" style=""></a>
-                        <div class="comment-2">
-                            <p>Khoá Học C++</p>
-                            <p>129.000đ</p>
-                        </div>
-                    </div>
-                </div>
+                    <?php if (($index + 1) % 3 == 0): ?>
+                        <!-- Kết thúc một hàng sau mỗi 3 khóa học -->
+                        </div><div class="box_mid">
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
             <script>
-            let currentIndex = 0; // Khởi tạo chỉ số slide hiện tại
-        const boxLefts = document.getElementsByClassName("box_left"); // Lấy tất cả các phần tử box_left
-        const sectionTops = document.getElementsByClassName("section_box_top"); // Lấy tất cả các phần tử section_box_top
+                                let currentIndex = 0; // Khởi tạo chỉ số slide hiện tại
+                    const boxLefts = document.getElementsByClassName("box_left"); // Lấy tất cả các phần tử box_left
 
-        // Hàm hiển thị box_left và section_box_top hiện tại
-        function showSlide(index) {
-            // Ẩn tất cả các phần tử box_left
-            for (let i = 0; i < boxLefts.length; i++) {
-                boxLefts[i].style.display = "none";
-            }
+                    // Hàm hiển thị box_left hiện tại
+                    function showSlide(index) {
+                        // Ẩn tất cả các phần tử box_left
+                        for (let i = 0; i < boxLefts.length; i++) {
+                            boxLefts[i].style.display = "none";
+                        }
 
-            // Ẩn tất cả các phần tử section_box_top
-            for (let i = 0; i < sectionTops.length; i++) {
-                sectionTops[i].style.display = "none";
-            }
+                        // Xử lý việc lặp lại chỉ số
+                        if (index >= boxLefts.length) {
+                            currentIndex = 0; // Nếu chỉ số vượt quá, quay lại slide đầu tiên
+                        }
+                        if (index < 0) {
+                            currentIndex = boxLefts.length - 1; // Nếu nhỏ hơn 0, quay lại slide cuối cùng
+                        }
 
-            // Xử lý việc lặp lại chỉ số
-            if (index >= boxLefts.length || index >= sectionTops.length) {
-                currentIndex = 0; // Nếu chỉ số vượt quá, quay lại slide đầu tiên
-            }
-            if (index < 0) {
-                currentIndex = boxLefts.length - 1; // Nếu nhỏ hơn 0, quay lại slide cuối cùng
-            }
+                        // Hiển thị box_left hiện tại
+                        boxLefts[currentIndex].style.display = "flex";
+                    }
 
-            // Hiển thị box_left và section_box_top hiện tại
-            boxLefts[currentIndex].style.display = "flex";
-            sectionTops[currentIndex].style.display = "block";
-        }
+                    // Hàm khi nhấn nút "Next"
+                    function nextSlide() {
+                        currentIndex++; // Chuyển tới slide tiếp theo
+                        showSlide(currentIndex); // Hiển thị slide mới
+                    }
 
-        // Hàm khi nhấn nút "Next"
-        function nextSlide() {
-            currentIndex++; // Chuyển tới slide tiếp theo
-            showSlide(currentIndex); // Hiển thị slide mới
-        }
+                    // Hàm khi nhấn nút "Back"
+                    function prevSlide() {
+                        currentIndex--; // Quay lại slide trước
+                        showSlide(currentIndex); // Hiển thị slide mới
+                    }
 
-        // Hàm khi nhấn nút "Back"
-        function prevSlide() {
-            currentIndex--; // Quay lại slide trước
-            showSlide(currentIndex); // Hiển thị slide mới
-        }
+                    // Gắn sự kiện cho các nút "Next" và "Back"
+                    document.getElementById("next").addEventListener("click", nextSlide);
+                    document.getElementById("prev").addEventListener("click", prevSlide);
 
-        // Gắn sự kiện cho các nút "Next" và "Back"
-        document.getElementById("next").addEventListener("click", nextSlide);
-        document.getElementById("prev").addEventListener("click", prevSlide);
-
-        // Hiển thị slide đầu tiên khi tải trang
-        showSlide(currentIndex);
+                    // Hiển thị slide đầu tiên khi tải trang
+                    showSlide(currentIndex);
     </script>
-    <!-- <script src="../js/box.js"></script> -->
-
     <div class="section_mid">
         <h1>Khoá học miễn phí</h1>
         <div class="section_box">
@@ -205,41 +206,24 @@
                 </div>
             </div>
             <div class="box_mid">
+                <?php foreach ($freeCourses as $index => $course): ?>
                 <div class="box3">
                     <div class="img-box">
-                        <a href="../sinhvien_php/hocbai_fr.php">
-                            <img src="../img/c++.png" alt="anh1" style="">
-                            <div class="comment-2">
-                                <p>Khoá Học IT</p>
-                                <p>miễn phí</p>
-                            
-                            </div>
+                        <a href="kick_kh-1.php?subject_id=<?php echo $course['chapter_id']; ?>">
+                            <img src="image.php?id=<?php echo $course['chapter_id']; ?>" alt="Khóa học">
                         </a>
-                    
+                        <div class="comment-2">
+                            <p><?php echo htmlspecialchars($course['chapter_name']); ?></p>
+                            <p>Miễn phí</p>
+                        </div>
                     </div>
                 </div>
-                <div class="box3">
-                    <div class="img-box">
-                        <a href="../sinhvien_php/hocbai_fr.php">
-                            <img src="../img/Sass.png" alt="anh1" style="">
-                            <div class="comment-2">
-                                <p>Khoá Học IT</p>
-                                <p>miễn phí</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="box3">
-                    <div class="img-box">
-                        <a href="../sinhvien_php/hocbai_fr.php">
-                            <img src="../img/2.png" alt="anh1" style="">
-                            <div class="comment-2">
-                                <p>Khoá Học IT</p>
-                                <p>miễn phí</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+
+                <?php if (($index + 1) % 3 == 0): ?>
+                    <!-- Kết thúc một hàng sau mỗi 3 khóa học -->
+                    </div><div class="box_mid">
+                    <?php endif; ?>
+                    <?php endforeach; ?>
             </div>
         </div>
     </div>
